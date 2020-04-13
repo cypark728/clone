@@ -157,14 +157,63 @@ char* mv_get_state(T_Movie* p){
     return p->state;
 }
 
-void mv_get_all(T_Movie* a[]){
-	int i, c=0;
-	for(i=0;i<MAX_MOVIES; i++){
-		if(movies[i] != NULL){
-			a[c]=movies[i];
-			c++;
+// Below functions are used in menus related to update.
+
+void mv_update(T_Movie* p, char* g, char* d, int a, int s){
+	
+    char str[10]; 
+
+    strcpy(p->genre, g);
+    strcpy(p->distri, d);
+    if(a!=1){
+        sprintf(str, "%d", a);
+        strcpy(p->age, str);
+    }
+    else{
+	strcpy(str, "ALL");
+	strcpy(p->age, str);
+    }
+    strcpy(p->state,state_real[s]);
+}
+
+void mv_update_by_genre(T_Movie* p, char* g){
+	strcpy(p->genre, g);
+}
+void mv_update_by_distri(T_Movie* p, char* d){
+	strcpy(p->distri, d);
+}
+void mv_update_by_age(T_Movie* p, int a){
+	
+    char str[10]; 
+
+    if(a!=1){
+        sprintf(str, "%d", a);
+        strcpy(p->age, str);
+    }
+    else{
+	strcpy(str, "ALL");
+	strcpy(p->age, str);
+    }
+}
+void mv_update_by_state(T_Movie* p, int s){
+	strcpy(p->state, state_real[s]);
+}
+char* get_state(int s){
+	return state_real[s];
+}
+
+// Below functions are used in menus related to delete.
+void mv_delete(T_Movie* p){
+	int index;
+	for(int i=0; i<MAX_MOVIES; i++){
+		if(movies[i]==p){
+			index = i;
+			break;
 		}
 	}
+	free(p);
+	movies[index] = NULL;
+	_count--;
 }
 
 // for saving files
@@ -202,6 +251,16 @@ int mv_get_distris_save(char* md[]){
     return c;
 }
 // end
+
+void mv_get_all(T_Movie* a[]){
+	int i, c=0;
+	for(i=0;i<MAX_MOVIES; i++){
+		if(movies[i] != NULL){
+			a[c]=movies[i];
+			c++;
+		}
+	}
+}
 
 int mv_get_some_by_genre(T_Movie* a[], char* g){
     int i, c=0;

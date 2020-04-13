@@ -32,13 +32,24 @@ int mv_valid_about_state_file(char* s);
 void mv_create(char *t, char *g, char *d, int a, int s);
 void mv_create_by_file(char *t, char *g, char *d, char *a, char *s);
 
-//Bellow functions are used in (2)read menu. + list menu
+//Below functions are used in (2)read menu. + list menu
 
 char* mv_get_title(T_Movie* p);
 char* mv_get_genre(T_Movie* p);
 char* mv_get_distri(T_Movie* p);
 char* mv_get_age(T_Movie* p);
 char* mv_get_state(T_Movie* p);
+
+// Below function are used in menus related to update.
+void mv_update(T_Movie* p, char* g, char* d, int a, int s);
+void mv_update_by_genre(T_Movie* p, char* g);
+void mv_update_by_distri(T_Movie* p, char* d);
+void mv_update_by_age(T_Movie* p, int a);
+void mv_update_by_state(T_Movie* p, int s);
+char* get_state(int s);
+
+// Bello functions are used in menus related to delete.
+void mv_delete(T_Movie* p);
 
 // for save report 
 int mv_get_titles_save(char* mt[]);
@@ -53,7 +64,7 @@ int mv_get_some_by_state(T_Movie* a[], int s);
 
 char* mv_to_string(T_Movie* p);
  
-//Bellow functions are used in menus related to statistics or file
+//Below functions are used in menus related to statistics or file
 
 void print_statistics(int g[], int a[], int s[]);
 void save_statistics(char* filename, int g[], int a[], int s[]);
@@ -65,7 +76,7 @@ const int get_genre_size();
 const int get_age_size();
 const int get_state_size();
 
-//Bellow functions are use in file menu
+//Below functions are use in file menu
 
 char* mv_to_string_save(T_Movie* p);
 void report_about_titles(FILE* f);
