@@ -42,7 +42,7 @@ void mv_init(){
 #ifdef DEBUG
 			printf("[DEBUG] Now, delete the movie : %s\n", movies[i]->title);
 #endif
-	 	    free(movies[i]);
+	 	    free(movies[i]);			
 		    movies[i]=NULL; // to prevent dangling pointer problem.
 		}
     }
@@ -174,6 +174,9 @@ void mv_update(T_Movie* p, char* g, char* d, int a, int s){
 	strcpy(p->age, str);
     }
     strcpy(p->state,state_real[s]);
+#ifdef DEBUG
+	printf("Movie [%s] is updated!\n", p->title);
+#endif
 }
 
 void mv_update_by_genre(T_Movie* p, char* g){
@@ -204,6 +207,10 @@ char* get_state(int s){
 
 // Below functions are used in menus related to delete.
 void mv_delete(T_Movie* p){
+#ifdef DEBUG
+	char title[30];
+	strcpy(title, p->title);
+#endif
 	int index;
 	for(int i=0; i<MAX_MOVIES; i++){
 		if(movies[i]==p){
@@ -214,6 +221,9 @@ void mv_delete(T_Movie* p){
 	free(p);
 	movies[index] = NULL;
 	_count--;
+#ifdef DEBUG
+	printf("Movie [%s] is deleted!\n", title);
+#endif
 }
 
 // for saving files
@@ -338,6 +348,64 @@ char* mv_to_string(T_Movie* p){
     return str;
 }
 
+//Below functions are used in tidy_up and sort menus....
+void arrange_order(){
+
+#ifdef DEBUG
+	printf("-------------------------------------\n");
+	printf("[DEBUG] Before arranging...\n");
+	for(int i=0;i<MAX_MOVIES;i++){
+		if(movies[i]==NULL){
+			printf("[DEBUG] movies[%d]: NULL\n", i);
+		}
+		else printf("{DEBUG] movies[%d]: %s\n", i, movies[i]->title);
+	}
+	printf("-------------------------------------\n");
+#endif
+
+	for(int i=0; i<MAX_MOVIES-1; i++){
+		int count_limit = MAX_MOVIES-1 - i; // this means, how many times the while loop can execute.
+		int count = 0; // for check : already tidy up MAX_MOVIES-1-i), but it is still NULL. That means, all of after movies[i] are NULL.
+		int flag = 0; // to check whether count is MAX_MOVIES-1-i or not.
+		
+		while(movies[i]==NULL){
+			for(int j=i; j<MAX_MOVIES-1;j++){
+				movies[j] = movies[j+1];
+				movies[j+1] = NULL;
+			}
+			count++;
+#ifdef DEBUG
+			printf("[DEBUG] movie reoord index :            %d\n", i);
+			printf("[DEBUG] total arraging count :          %d\n", count);
+			printf("[DEBUG] count_limit;(MAX_MOVIES-1)-i) : %d\n\n", count_limit);
+			
+			for(int i=0;i<MAX_MOVIES;i++){
+				if(movies[i]==NULL){
+					printf("[DEBUG] movies[%d]: NULL\n", i);
+				}
+				else printf("[DEBUG] movies[%d]: %s\n", i, movies[i]->title);
+			}
+			printf("\n");
+#endif
+			if(count==count_limit&&movies[i]==NULL){
+				flag=1;
+				break;
+			}	
+		}
+		if(flag==1) break;
+	}	
+#ifdef DEBUG
+	printf("-------------------------------------\n");
+	printf("[DEBUG] After arranging...\n");
+	for(int i=0;i<MAX_MOVIES;i++){
+		if(movies[i]==NULL){
+			printf("[DEBUG] movies[%d]: NULL\n", i);
+		}
+		else printf("{DEBUG] movies[%d]: %s\n", i, movies[i]->title);
+	}
+	printf("-------------------------------------\n");
+#endif
+}	
 //Bellow functions are used in menus related to statistics or file
 
 void print_statistics(int g[], int a[], int s[]){

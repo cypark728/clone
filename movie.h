@@ -63,7 +63,11 @@ int mv_get_some_by_age(T_Movie* a[], int age);
 int mv_get_some_by_state(T_Movie* a[], int s);
 
 char* mv_to_string(T_Movie* p);
- 
+
+//Below functions are used in tidy_up and sort menus....
+void arrange_order();
+
+
 //Below functions are used in menus related to statistics or file
 
 void print_statistics(int g[], int a[], int s[]);

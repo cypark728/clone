@@ -384,7 +384,8 @@ void update_mv_record_by_case(){
 			mv_update_by_genre(p, target);
 	    }
 
-		printf("The movies of [%s] are changed their genre; [%s]\n" , genre, target);
+		if(size>0) printf("The movies of [%s] are updated their genre; [%s]\n" , genre, target);
+		else printf("There is nothing of [%s] to update!\n", genre);
 	    break;
 	}
 
@@ -408,7 +409,8 @@ void update_mv_record_by_case(){
 	    	mv_update_by_distri(p, target);
 		}
 		
-		printf("The movies of [%s] are changed their distributor; [%s]\n" , distri, target);
+		if(size>0) printf("The movies of [%s] are updated their distributor; [%s]\n" , distri, target);
+		else printf("There is nothing of [%s] to update!\n", distri);
 	    break;
 	}
 
@@ -445,8 +447,9 @@ void update_mv_record_by_case(){
 		else strcpy(str1, "ALL");
 		if(target!=1) sprintf(str2, "%d", target);
 		else strcpy(str2, "ALL");
-
-		printf("The movies of [%s] are changed their Minimum viewing Age; [%s]\n" , str1, str2);
+		
+		if(size>0) printf("The movies of [%s] are updated their Minimum viewing Age; [%s]\n" , str1, str2);
+		else printf("There is nothing of [%s] to update!\n", str1);
 	    break;
 	}
 
@@ -478,7 +481,8 @@ void update_mv_record_by_case(){
 			mv_update_by_state(p, target);
 	    }
 
-		printf("The movies of [%s] are changed their State; [%s]\n" , get_state(state), get_state(target));
+		if(size>0) printf("The movies of [%s] are updated their State; [%s]\n" , get_state(state), get_state(target));
+		else printf("There is nothing of [%s] to update!\n", get_state(state));
 		break;
 	}
 
@@ -499,7 +503,6 @@ void delete_mv_record(){
 	    T_Movie* p = mv_search_by_title(title);
 		if(p){
 			mv_delete(p);
-			printf("The movie [%s]'s record is deleted!\n", title);
 		}
 		else{
 			printf("No such movie!\n");
@@ -638,7 +641,9 @@ void list_mv_record(){
 
 
 void tidy_up_mv_record(){
-
+	printf("Start arranging the order of movie records...\n");
+	arrange_order();
+	printf("Done of arranging!\n");
 }
 
 void sort_mv_record(){
