@@ -196,8 +196,9 @@ void read_mv_record(){
 	    int size = mv_get_some_by_genre(movies, genre);
 	    printf("%d movies are found!.\n", size);
 	    for(int i = 0 ; i < size; i++){
-		T_Movie* p = movies[i];
-		printf("%d. %s\n", i+1, mv_to_string(p));
+			T_Movie* p = movies[i];
+			char order[10]; sprintf(order, "%d.", i+1); 
+			printf("%-3s %s\n", order, mv_to_string(p));
 	    }
 
 	    break;
@@ -216,8 +217,9 @@ void read_mv_record(){
 	    int size = mv_get_some_by_distri(movies, distri);
 	    printf("%d movies are found!.\n", size);
 	    for(int i = 0 ; i < size; i++){
-		T_Movie* p = movies[i];
-		printf("%d. %s\n", i+1, mv_to_string(p));
+			T_Movie* p = movies[i];
+			char order[10]; sprintf(order, "%d.", i+1); 
+			printf("%-3s %s\n", order, mv_to_string(p));
 	    }
 
 	    break;
@@ -239,8 +241,9 @@ void read_mv_record(){
 	    int size = mv_get_some_by_age(movies, age);
 	    printf("%d movies are found!.\n", size);
 	    for(int i = 0 ; i < size; i++){
-		T_Movie* p = movies[i];
-		printf("%d. %s\n", i+1, mv_to_string(p));
+			T_Movie* p = movies[i];
+			char order[10]; sprintf(order, "%d.", i+1); 
+			printf("%-3s %s\n", order, mv_to_string(p));
 	    }
 
 	    break;
@@ -262,8 +265,9 @@ void read_mv_record(){
 	    int size = mv_get_some_by_state(movies, state);
 	    printf("%d movies are found!.\n", size);
 	    for(int i = 0 ; i < size ; i++){
-		T_Movie* p = movies[i];
-		printf("%d. %s\n", i+1, mv_to_string(p));
+			T_Movie* p = movies[i];
+			char order[10]; sprintf(order, "%d.", i+1); 
+			printf("%-3s %s\n", order, mv_to_string(p));
 	    }
 
             break;
@@ -735,7 +739,7 @@ void load_mv_file(){
 
 	while(!feof(f)){
 		if(!mv_is_available()){
-			printf("[Load] Line %d : there is no more space!\n", line+1);
+			printf("[Load] Line %d : there is no more space!\n", line);
 			break;
 		}
 
@@ -745,8 +749,6 @@ void load_mv_file(){
 		char* isValid_d = fgets(distri, sizeof(distri), f);
 		result += fscanf(f, "%s ", age);
 		char* isValid_s = fgets(state, sizeof(state), f);
-		
-		line+=4;
 		
 		if(isValid_t == NULL){
 			break;
@@ -766,27 +768,28 @@ void load_mv_file(){
 		state[strlen(state)-1] = '\0';
 
 		if(mv_search_by_title(title)){
-			printf("[Load] Line %d : Duplicated title<%s>! keep loading...\n", line-1, title);
+			printf("[Load] Line %d : Duplicated title<%s>! keep loading...\n", line, title);
 			continue;
 		}
 		if(!mv_valid_about_genre(genre)){
-			printf("[Load] Line %d : Invalid genre<%s>! keep loading...\n", line, genre);
+			printf("[Load] Line %d : Invalid genre<%s>! keep loading...\n", line+1, genre);
 			continue;
 		}
 		if(!mv_valid_about_age_file(age)){
-			printf("[Load] Line %d : Invalid minimum viewing age<%s>! keep loading...\n", line, age);
+			printf("[Load] Line %d : Invalid minimum viewing age<%s>! keep loading...\n", line+2, age);
 			continue;
 		}
 		if(!mv_valid_about_state_file(state)){
-			printf("[Load] Line %d : Invalid state<%s>! keep loading...\n", line, state);
+			printf("[Load] Line %d : Invalid state<%s>! keep loading...\n", line+2, state);
 			continue;
 		}
 		mv_create_by_file(title, genre, distri, age, state);
 #ifdef DEBUG
 		printf("[DEBUG] load - %s\n", title);
 #endif
+		line+=4;
 	}
-	printf("\n%d movies are read from file!\n", mv_count());
+	printf("%d movies are read from file!\n", mv_count());
 	fclose(f);
 }
 
@@ -802,7 +805,7 @@ void save_mv_file(){
 	mv_get_all(movies);
 	for(int i = 0 ; i<size; i++){
 		T_Movie* p = movies[i];
-		fprintf(f, "%s\n", mv_to_string_save(p));
+		fprintf(f, "%s\n\n", mv_to_string_save(p));
 	}
 	printf("Movie data is now stored in %s!\n", filename);
 	fclose(f);

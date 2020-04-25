@@ -623,7 +623,7 @@ char* mv_to_string_save(T_Movie* p){
 	
     static char str[150];
     
-    sprintf(str, "%s\n%s %s %s %s", p->title, p->genre, p->distri, p->age, p->state);
+    sprintf(str, "%s\n%s %s\n%s %s", p->title, p->genre, p->distri, p->age, p->state);
     return str;
 }
 
@@ -639,7 +639,8 @@ void report_about_titles(FILE* f){
 	int size = mv_get_titles_save(mv_t);
 
 	for(int i=0;i<size;i++){
-		fprintf(f, "%d. %s\n", i+1, mv_t[i]);
+		char order[10]; sprintf(order, "%d.", i+1); 
+		fprintf(f, "%-3s %s\n", order, mv_t[i]);
 	}
 	fprintf(f, "\n\n");
 
@@ -657,7 +658,8 @@ void report_about_states(FILE* f){
 		int size = mv_get_some_by_state(movies_by_state, state[i]);
 		fprintf(f,"[%d] %s : %d movies\n", i+1, state_real[i], size);
 		for(int j=0;j<size;j++){
-			fprintf(f, "%d. %s\n", j+1, mv_get_title(movies_by_state[j]));
+			char order[10]; sprintf(order, "%d.",j+1); 
+			fprintf(f, "%-3s %s\n", order, mv_get_title(movies_by_state[j]));
 		}
 		fprintf(f, "\n\n");
 #ifdef DEBUG
@@ -679,7 +681,8 @@ void report_about_genres(FILE* f){
 		int size = mv_get_some_by_genre(movies_by_genre, genre_list[i]);
 		fprintf(f, "[%d] %s : %d movies\n", i+1, genre_list[i], size);
 		for(int j=0; j<size; j++){
-			fprintf(f, "%d. %s\n", j+1, mv_get_title(movies_by_genre[j]));
+			char order[10]; sprintf(order, "%d.",j+1); 
+			fprintf(f, "%-3s %s\n", order, mv_get_title(movies_by_genre[j]));
 		}
 		fprintf(f, "\n\n");
 #ifdef DEBUG
@@ -701,7 +704,8 @@ void report_about_ages(FILE* f){
 		int size = mv_get_some_by_age(movies_by_age, age_list[i]);
 		fprintf(f, "[%d] %s : %d movies\n", i+1, str_age_list[i], size);
 		for(int j=0; j<size; j++){
-			fprintf(f, "%d. %s\n", j+1, mv_get_title(movies_by_age[j]));
+			char order[10]; sprintf(order, "%d.",j+1); 
+			fprintf(f, "%-3s %s\n", order, mv_get_title(movies_by_age[j]));
 		}
 		fprintf(f, "\n\n");
 #ifdef DEBUG
@@ -723,7 +727,8 @@ void report_about_distris(FILE* f){
 
 	fprintf(f, "[Total] : %d kinds of distributors.\n-\n", size);
 	for(int i=0; i<size; i++){
-		fprintf(f, "%d. %s\n", i+1, distri[i]);
+		char order[10]; sprintf(order, "%d.",i+1); 
+		fprintf(f, "%-3s %s\n", order, distri[i]);
 	}
 
 #ifdef DEBUG
