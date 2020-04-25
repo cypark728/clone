@@ -1,0 +1,100 @@
+
+This Project is for <2020-1 Open Sourse Software Lab, Handong Global University>
+
+
+Author : Lee Wonbin
+Program : Managing movies in theater
+
+
+The program consists of three files.
+
+1. movie_main.c
+   - Managing all of the menus. 
+
+2. movie.c
+   - Library functions.
+
+3. movie.h
+   - Structures, Macro, Function prototypes.
+
+
+<Details> 
+
+1. movie_main.c
+   i) menu
+
+      - Create
+	    : Create a new movie record, and the information of that record is given from the user.
+
+	  - Read
+	    : Read a movie record searched by a certain title.
+		  Or, read movie records searched by genre or distributor or minimum viewing age or state.
+
+	  - Update
+	    : Update a movie record searched by a certain title.
+
+	  - Update by cases
+	    : Update some movie records by genre or distributor or minimum viewing age or state.
+
+	  - Delete
+	    : Delete a movie record searched by a certain title.
+
+	  - Delete by cases
+	    : Delete some movie records by genre or distributor or minimum viewing age or state.
+
+	  - List
+	    : Print all of the movie records.
+
+	  - Tidy up
+	    : Araange the movie records so that there is no null pointer between valid movie records.
+
+	  - Sort
+	    : Sort the movie records by title or genre or distributor or minimum viewing age or state. The standard is ASKII CODE.
+
+	  - Print statistics
+	    : Print statistics about movie records on the screen.
+
+	  - Save statistics
+	    : Save statistics about movie records to a certain data file.
+
+	  - Load 
+	    : Load movie records from a certain data file.
+
+	  - Save
+	    : Save movie records to a certain data file.
+
+	  - Report
+	    : Save movie records and their statistics to a certain data file, keeping a given form.
+
+   ii) Characteristic
+      - All of the movie_main.c's functions don't directly access to movie records. This means, this file is an application file. 
+
+2. movie.c
+	
+   i) contents
+      - It contains movie record pointer array.
+      - It contains some limited info about movies. EX) genres, ages, states.
+      - It contains functions that used movie_main.c.
+   ii) Characteristic
+      - There is no limit for directly accesing to movie record. Therefore, all of functions in this file can do so.
+
+3. movie.h
+ 
+   : It just contains a structure type for movie record, and function decleraitons(prototypes) for both of movie_main.c and movie.c
+
+
+ETC)
+  
+  1. Makefile
+     : You can simply make a executable file via using make utility
+
+	   - make movie : movie executable file is made.
+	   - make movie_debug : movie executable file applied DEBUG is made. This file is for debugging.
+       - make clean : remove all of the object files.
+	   - make cleanx : remove all of the object files and executable file(movie)
+
+  2. data.txt
+     : This file includes 50 movie information. And, this file exists for teting load menu.
+
+
+
