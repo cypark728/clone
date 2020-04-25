@@ -87,7 +87,7 @@ void create_mv_record(){
 	return;
     }
    
-    char title[30], genre[30], distri[30];
+    char title[50], genre[50], distri[50];
     int age, state;
     
     printf("Enter a new movie's info.\n");
@@ -101,7 +101,7 @@ void create_mv_record(){
 	return;
     }	
     
-    printf("Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy (Caution at the Capital letter) > ");
+    printf("Genre - Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > ");
     do{
         fgets(genre, sizeof(genre), stdin);
         genre[strlen(genre)-1] = '\0';
@@ -157,7 +157,7 @@ void read_mv_record(){
 	case 1:
 	{
 	    printf("This option will show a information of a movie.\n");
-	    char title[30];
+	    char title[50];
 	    printf("\nEnter a title > ");
 	    fgets(title, sizeof(title), stdin);
   	    title[strlen(title)-1] = '\0';
@@ -181,8 +181,8 @@ void read_mv_record(){
 
 	case 2:
 	{
-	    char genre[30];
-            printf("Enter a Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy (Caution at the Capital letter) > ");
+	    char genre[50];
+            printf("Enter a Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > ");
     	    fgets(genre, sizeof(genre), stdin);
             genre[strlen(genre)-1] = '\0';
 	
@@ -205,7 +205,7 @@ void read_mv_record(){
 
 	case 3 : 
 	{
-	    char distri[30];
+	    char distri[50];
 	    printf("Enter a distributor > ");	    
    	    fgets(distri, sizeof(distri), stdin);
     	    distri[strlen(distri)-1] = '\0';
@@ -277,7 +277,7 @@ void read_mv_record(){
 
 void update_mv_record(){
 	
-	    char title[30];
+	    char title[50];
 	    printf("Enter a title > ");
 	    fgets(title, sizeof(title), stdin);
   	    title[strlen(title)-1] = '\0';
@@ -285,12 +285,12 @@ void update_mv_record(){
 	    T_Movie* p = mv_search_by_title(title);
 
 	    if(p){
-			char genre[30], distri[30];
+			char genre[50], distri[50];
 			int age, state;
 		
 			printf("Enter a updated Movie info.\n");
 
-			printf("Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy (Caution at the Capital letter) > ");
+			printf("Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > ");
     		do{
         		fgets(genre, sizeof(genre), stdin);
        			genre[strlen(genre)-1] = '\0';
@@ -350,8 +350,8 @@ void update_mv_record_by_case(){
     switch(option){
 	case 1:
 	{
-	    char genre[30];
-            printf("Enter a Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy (Caution at the Capital letter) > ");
+	    char genre[50];
+            printf("Enter a Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > ");
     	    fgets(genre, sizeof(genre), stdin);
             genre[strlen(genre)-1] = '\0';
 	
@@ -363,8 +363,8 @@ void update_mv_record_by_case(){
 			break;
 	    }
 	    
-	    char target[30];
-            printf("Enter a Genre for updating -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy (Caution at the Capital letter) > ");
+	    char target[50];
+            printf("Enter a Genre for updating -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > ");
     	    fgets(target, sizeof(target), stdin);
            	target[strlen(target)-1] = '\0';
 
@@ -391,12 +391,12 @@ void update_mv_record_by_case(){
 
 	case 2: 
 	{
-	    char distri[30];
+	    char distri[50];
 	    printf("Enter a distributor > ");	    
    	    fgets(distri, sizeof(distri), stdin);
     	    distri[strlen(distri)-1] = '\0';
 	    
-	    char target[30];
+	    char target[50];
 	    printf("Enter a distributor for updating > ");	    
    	    fgets(target, sizeof(target), stdin);
     	    target[strlen(target)-1] = '\0';
@@ -495,7 +495,7 @@ void update_mv_record_by_case(){
 
 void delete_mv_record(){
 	
-	    char title[30];
+	    char title[50];
 	    printf("Enter a title > ");
 	    fgets(title, sizeof(title), stdin);
   	    title[strlen(title)-1] = '\0';
@@ -520,8 +520,8 @@ void delete_mv_record_by_case(){
     switch(option){
 	case 1:
 	{
-	    char genre[30];
-            printf("Enter a Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy (Caution at the Capital letter) > ");
+	    char genre[50];
+            printf("Enter a Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > ");
     	    fgets(genre, sizeof(genre), stdin);
             genre[strlen(genre)-1] = '\0';
 	
@@ -548,7 +548,7 @@ void delete_mv_record_by_case(){
 
 	case 2: 
 	{
-	    char distri[30];
+	    char distri[50];
 	    printf("Enter a distributor > ");	    
    	    fgets(distri, sizeof(distri), stdin);
     	    distri[strlen(distri)-1] = '\0';
@@ -635,7 +635,8 @@ void list_mv_record(){
 
 	for(int i = 0 ; i < size ; i++){
 		T_Movie* p = movies[i];
-		printf("%d. %s\n", i+1, mv_to_string(p));
+		char order[10]; sprintf(order, "%d.", i+1); 
+		printf("%-3s %s\n", order, mv_to_string(p));
 	}
 }
 
@@ -647,6 +648,17 @@ void tidy_up_mv_record(){
 }
 
 void sort_mv_record(){
+	int option;
+	printf("Option (for sorting) : 1.Title 2.Genre 3.Distributor 4.Minimum Viewing Age 5.State > "); 
+	scanf("%d", &option);
+    
+	if(!(option>=1&&option<=5)){
+		printf("Invalid Option.\n");
+		return;
+	}
+	printf("\nStart sorting the movie records...\n");
+	sort(option);
+	printf("Done of sorting!\n");
 }
 
 void print_statistics_mv_record(){
@@ -687,7 +699,7 @@ void save_statistics_mv_record(){
 	printf("[DEBUG] Done of counting!\n");
 #endif
 
-	char filename[30];
+	char filename[50];
 	printf("Enter a filename to save > ");
 	scanf("%s", filename);
 
@@ -698,7 +710,7 @@ void load_mv_file(){
 
 	printf("All movie datas will be deleted and new movie records will be reloaded.\n");
 	
-	char filename[30];
+	char filename[50];
 
 	printf("\nEnter a filename to load > ");
 	scanf("%s", filename); printf("\n");
@@ -718,8 +730,8 @@ void load_mv_file(){
 	
 	mv_init();
 
-	char title[30], genre[30], distri[30], age[30], state[30];
-	int line = 0;
+	char title[50], genre[50], distri[50], age[50], state[50];
+	int line = 1;
 
 	while(!feof(f)){
 		if(!mv_is_available()){
@@ -728,20 +740,28 @@ void load_mv_file(){
 		}
 
 		char* isValid_t = fgets(title, sizeof(title), f);
-		int result = fscanf(f, "%s %s %s ", genre, distri, age);
+		if(!strcmp(title, "\n")) continue;
+		int result = fscanf(f, "%s ", genre);
+		char* isValid_d = fgets(distri, sizeof(distri), f);
+		result += fscanf(f, "%s ", age);
 		char* isValid_s = fgets(state, sizeof(state), f);
 		
-		line+=2;
+		line+=4;
 		
 		if(isValid_t == NULL){
 			break;
 		}
-		if(result<3) break;	
+		if(result<2) break;
+		if(isValid_d == NULL){
+			break;
+		}
 		if(isValid_s == NULL){
 			break;
 		}
 	
 		title[strlen(title)-1] = '\0';
+
+		distri[strlen(distri)-1] = '\0';
 
 		state[strlen(state)-1] = '\0';
 
@@ -772,7 +792,7 @@ void load_mv_file(){
 
 void save_mv_file(){
 	
-	char filename[30];
+	char filename[50];
 	printf("Enter a filename to save > ");
 	scanf("%s", filename);
 
@@ -790,7 +810,7 @@ void save_mv_file(){
 
 void make_mv_report(){
 
-	char filename[30];
+	char filename[50];
 	printf("Enter a filename to save report > ");
 	scanf("%s", filename);
 

@@ -1,9 +1,10 @@
 #include "movie.h"
+#include <stdlib.h>
 
 T_Movie* movies[MAX_MOVIES];
 int _count = 0;
 
-char genre_list[8][20] = {"Action", "Melo", "Thriller", "Comedy", "Mystery", "Adventure", "SF", "Fantasy"};
+char genre_list[9][20] = {"Action", "Melo", "Thriller", "Comedy", "Mystery", "Adventure", "SF", "Fantasy", "Drama"};
 const int genre_size = sizeof(genre_list) / sizeof(genre_list[0]);
 
 int age_list[5] = {1, 7, 12, 15, 18};
@@ -208,7 +209,7 @@ char* get_state(int s){
 // Below functions are used in menus related to delete.
 void mv_delete(T_Movie* p){
 #ifdef DEBUG
-	char title[30];
+	char title[50];
 	strcpy(title, p->title);
 #endif
 	int index;
@@ -328,23 +329,23 @@ int mv_get_some_by_state(T_Movie* a[], int s){
 char* mv_to_string(T_Movie* p){
     static char str[150];
     
-    char t[30];
+    char t[50];
     strcpy(t, p->title);
     strcat(t, "]");
-    char g[30];
+    char g[50];
     strcpy(g, p->genre);
     strcat(g, "]");
-    char d[30];
+    char d[50];
     strcpy(d, p->distri);
     strcat(d, "]");
-    char a[30];
+    char a[50];
     strcpy(a, p->age);
     strcat(a, "]");
-    char s[30];
+    char s[50];
     strcpy(s, p->state);
     strcat(s, "]");
 
-    sprintf(str, "[%-30s\t / [%-20s\t / [%-20s\t / [%-5s\t / [%s", t, g, d, a, s);
+    sprintf(str, "[%-40s\t / [%-15s\t / [%-20s\t / [%-5s\t / [%s", t, g, d, a, s);
     return str;
 }
 
@@ -378,14 +379,6 @@ void arrange_order(){
 			printf("[DEBUG] movie reoord index :            %d\n", i);
 			printf("[DEBUG] total arraging count :          %d\n", count);
 			printf("[DEBUG] count_limit;(MAX_MOVIES-1)-i) : %d\n\n", count_limit);
-			
-			for(int i=0;i<MAX_MOVIES;i++){
-				if(movies[i]==NULL){
-					printf("[DEBUG] movies[%d]: NULL\n", i);
-				}
-				else printf("[DEBUG] movies[%d]: %s\n", i, movies[i]->title);
-			}
-			printf("\n");
 #endif
 			if(count==count_limit&&movies[i]==NULL){
 				flag=1;
@@ -393,6 +386,9 @@ void arrange_order(){
 			}	
 		}
 		if(flag==1) break;
+#ifdef DEBUG
+		printf("Index [%d] is now filled up! : %s\n\n", i, movies[i]->title);
+#endif
 	}	
 #ifdef DEBUG
 	printf("-------------------------------------\n");
@@ -406,6 +402,96 @@ void arrange_order(){
 	printf("-------------------------------------\n");
 #endif
 }	
+
+void sort(int option){
+	
+	arrange_order();
+
+	switch(option){
+		case 1:
+			for(int i=0; i<_count-1; i++){
+				for(int j=0; j<_count-1; j++){
+					if(strcmp(movies[j]->title,movies[j+1]->title)>0){
+#ifdef DEBUG
+						printf("[%s] vs [%s]\n", movies[j]->title, movies[j+1]->title);
+#endif
+						T_Movie* temp;
+						temp = movies[j];
+						movies[j] = movies[j+1];
+						movies[j+1] = temp;
+					}
+				}
+			}
+			break;
+		case 2:
+			for(int i=0; i<_count-1; i++){
+				for(int j=0; j<_count-1; j++){
+					if(strcmp(movies[j]->genre,movies[j+1]->genre)>0){
+#ifdef DEBUG
+						printf("[%s] vs [%s]\n", movies[j]->genre, movies[j+1]->genre);
+#endif
+						T_Movie* temp;
+						temp = movies[j];
+						movies[j] = movies[j+1];
+						movies[j+1] = temp;
+					}
+				}
+			}
+			break;
+		case 3:
+			for(int i=0; i<_count-1; i++){
+				for(int j=0; j<_count-1; j++){
+					if(strcmp(movies[j]->distri,movies[j+1]->distri)>0){
+#ifdef DEBUG
+						printf("[%s] vs [%s]\n", movies[j]->distri, movies[j+1]->distri);
+#endif
+						T_Movie* temp;
+						temp = movies[j];
+						movies[j] = movies[j+1];
+						movies[j+1] = temp;
+					}
+				}
+			}
+			break;
+		case 4:
+			for(int i=0; i<_count-1; i++){
+				for(int j=0; j<_count-1; j++){
+				    int a = atoi(movies[j]->age); // if atoi cannot convert anything, return 0
+					int b = atoi(movies[j+1]->age);
+					if(a==0) a++;
+					if(b==0) b++;
+					if(a>b){
+#ifdef DEBUG
+						printf("[%s] vs [%s]\n", movies[j]->age, movies[j+1]->age);
+#endif
+						T_Movie* temp;
+						temp = movies[j];
+						movies[j] = movies[j+1];
+						movies[j+1] = temp;
+					}
+				}
+			}
+			break;
+		case 5:
+			for(int i=0; i<_count-1; i++){
+				for(int j=0; j<_count-1; j++){
+					if(strcmp(movies[j]->state,movies[j+1]->state)>0){
+#ifdef DEBUG
+						printf("[%s] vs [%s]\n", movies[j]->state, movies[j+1]->state);
+#endif
+						T_Movie* temp;
+						temp = movies[j];
+						movies[j] = movies[j+1];
+						movies[j+1] = temp;
+					}
+				}
+			}
+			break;
+		default:
+			break;
+	}
+}
+
 //Bellow functions are used in menus related to statistics or file
 
 void print_statistics(int g[], int a[], int s[]){

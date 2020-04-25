@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_MOVIES 5 // The maximum number that can be stored in memory.
+#define MAX_MOVIES 100 // The maximum number that can be stored in memory.
 
 //Define the type of movie record, and compose the contents of that type.
 
 typedef struct st_movie{
-    char title[30];
-    char genre[30];
-    char distri[30];
-    char age[30];
-    char state[30];
+    char title[50];
+    char genre[50];
+    char distri[50];
+    char age[50];
+    char state[50];
 } T_Movie;
 
 int mv_is_available();
@@ -66,7 +66,7 @@ char* mv_to_string(T_Movie* p);
 
 //Below functions are used in tidy_up and sort menus....
 void arrange_order();
-
+void sort(int option);
 
 //Below functions are used in menus related to statistics or file
 
