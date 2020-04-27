@@ -1,0 +1,37 @@
+Menu : 1.Create 2.Read 3.Update 4.Update by case 5.Delete 6.Delete by case 7.List
+       8.Tidy up 9.Sort 10.Print statistics 11.Save statistics 12.Load 13.Save 14.Report 0.Quit > 1
+
+Enter a new movie's info.
+Title > 1
+Genre - Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > Melo
+distributor > 1
+Minimum Viewing Age : 7 / 12 / 15 / 18 / 1(ALL) > 1
+state : On screen - 1 / Due for release - 0 > 1
+
+Menu : 1.Create 2.Read 3.Update 4.Update by case 5.Delete 6.Delete by case 7.List
+       8.Tidy up 9.Sort 10.Print statistics 11.Save statistics 12.Load 13.Save 14.Report 0.Quit > 3
+
+Enter a title > 1
+Enter a updated Movie info.
+Genre -  Action / Melo / Thriller / Comedy / Mystery / Adventure / SF / Fantasy / Drama (Caution at the Capital letter) > Melo
+distributor > 1
+Minimum Viewing Age : 7 / 12 / 15 / 18 / 1(ALL) > 7
+state : On screen - 1 / Due for release - 0 > 1
+
+Menu : 1.Create 2.Read 3.Update 4.Update by case 5.Delete 6.Delete by case 7.List
+       8.Tidy up 9.Sort 10.Print statistics 11.Save statistics 12.Load 13.Save 14.Report 0.Quit > 2
+
+Option (read by) : 1.Title 2.Genre 3. Distributor 4.Minimum Viewing Age 5.State> 1
+This option will show a information of a movie.
+
+Enter a title > 1
+Movie info.
+Title : 1
+Genre : Melo
+Distributor : 1
+Minimum viewing age : 7
+State : On Screen
+
+Menu : 1.Create 2.Read 3.Update 4.Update by case 5.Delete 6.Delete by case 7.List
+       8.Tidy up 9.Sort 10.Print statistics 11.Save statistics 12.Load 13.Save 14.Report 0.Quit >
+
