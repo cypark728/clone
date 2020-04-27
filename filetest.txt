@@ -1,0 +1,15 @@
+Menu : 1.Create 2.Read 3.Update 4.Update by case 5.Delete 6.Delete by case 7.List
+       8.Tidy up 9.Sort 10.Print statistics 11.Save statistics 12.Load 13.Save 14.Report 0.Quit > 12
+
+All movie datas will be deleted and new movie records will be reloaded.
+
+Enter a filename to load > data.txt
+
+Are you sure this process is going on?
+1.Yes 0.No > 1
+
+50 movies are read from file!
+
+Menu : 1.Create 2.Read 3.Update 4.Update by case 5.Delete 6.Delete by case 7.List
+       8.Tidy up 9.Sort 10.Print statistics 11.Save statistics 12.Load 13.Save 14.Report 0.Quit >
+
